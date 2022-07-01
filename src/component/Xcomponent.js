@@ -9,7 +9,7 @@ export const LoginContainer = styled.div`
 `
 
 export const PageContainer = styled.div`
-    background: #fff;
+    background: #f3f3f3;
     padding: 8px 16px;
     min-height: calc(100vh - 50px);
 

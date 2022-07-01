@@ -43,7 +43,7 @@ const Login = props => {
 
 
             <LoginContainer>
-                <div style={{ padding: 16, border: "solid 1px #ccc", background: "#fff", borderRadius: 4, minWidth: 350 }} >
+                <div style={{ padding: 16, border: "solid 1px #ccc", background: "#fff", borderRadius: '10px', minWidth: 350 }} >
                     <Form layout="vertical" onFinish={handleSubmit}>
                         <Form.Item
                             label="Email"

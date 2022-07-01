@@ -17,3 +17,80 @@ body, html, #root {
   margin: 0px;
   padding: 0px;
 }
+
+.data-table-extensions , .sc-cxNHIi{
+  background-color: white !important;
+  border-radius: 10px !important;
+}
+
+.ant-modal-content { border-radius: 10px !important; }
+.ant-notification-notice { border-radius: 10px !important; }
+
+.email-container {
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 1.2rem;
+  background-color: white !important;
+  border-radius: 10px !important;
+  margin-bottom: 15px !important;
+}
+
+.ant-layout-sider { 
+  max-width: 250px !important;
+  min-width: 250px !important;
+  width: 250px !important;
+}
+
+/* .ant-layout{ margin-left: 200px !important;} */
+ 
+button { border-radius: 8px !important; }
+input { border-radius: 8px !important; }
+
+button.active { background-color: #5b0c1c; color:white !important; border-color: #5b0c1c !important; }
+button.active:hover { background-color: #5b0c1c; color:white !important; border-color: #5b0c1c !important;  }
+
+button.deactivate { background-color: #5b0c1c; color:white !important; border-color: #5b0c1c !important;  }
+button.deactivate:hover { background-color: #5b0c1c; color:white !important; border-color: #5b0c1c !important;  }
+
+
+/* @dashboard-styles ------------------------------------------------------------------------------- */
+
+  /* .dashboard-fieldset {
+    margin-top: 10px;
+    border: 3px solid rgb(91, 12, 28);
+    padding: 0px 1em 20px;
+    border-radius: 10px;
+  }
+
+  .dashboard-fieldset-heading {
+    width: fit-content;
+    margin-top: -14px;
+    margin-left: -1px;
+    background: rgb(243, 243, 243);
+  } */
+  .dashboard-card {
+    border-radius: 10px !important;
+    height: 120px;
+  }
+
+  .orders-card { background-color: #5b0c1c !important; }
+  .orders-card .today-orders { color: white; font-size: 1.4rem !important; padding: 0px !important; margin: 0px !important;  }
+  .orders-card .total-orders { color: white; font-size: 1.1rem !important; padding: 0px !important; margin: 5px 0px 0px 0px !important;  }
+
+  .sales-card { background-color: #001529 !important; }
+  .sales-card .today-sales { color: white; font-size: 1.4rem !important; padding: 0px !important; margin: 0px !important;  }
+  .sales-card .total-sales { color: white; font-size: 1.1rem !important; padding: 0px !important; margin: 5px 0px 0px 0px !important;  }
+
+  .cancelled-orders-card { background-color: #001529 !important; }
+  .cancelled-orders-card .today-cancelled-orders { color: white; font-size: 1.4rem !important; padding: 0px !important; margin: 0px !important;  }
+  .cancelled-orders-card .total-cancelled-orders { color: white; font-size: 1.1rem !important; padding: 0px !important; margin: 5px 0px 0px 0px !important;  }
+
+  .other-orders-details { background-color: #5b0c1c !important; margin-top: 10px !important; height: 200px !important; }
+  .other-orders-details p { letter-spacing: 1px; color: white; font-size: 1rem !important; padding: 0px !important; margin: 5px 0px 0px 0px !important;  }
+
+  .dashboard-date-filter { background-color: transparent !important; margin-bottom: 10px; padding: 10px 10px 10px 2px; border-radius: 10px; }
+  .dashboard-date-filter .date-picker { width: 100%; border-radius: 5px !important; }
+  .dashboard-date-filter .date-picker { width: 100%; border-radius: 5px !important; }
+
+/* ------------------------------------------------------------------------------------------------- */ 

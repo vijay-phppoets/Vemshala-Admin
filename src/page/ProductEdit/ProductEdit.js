@@ -78,23 +78,33 @@ const ProductEdit = props => {
                 tags: getProductViewState.product.tags,
                 stock: getProductViewState.product.stock,
                 gst: getProductViewState.product.gst,
+
+                meta_title       : getProductViewState.product.meta_title,
+                meta_keyword     : getProductViewState.product.meta_keyword,
+                meta_description : getProductViewState.product.meta_description,
+                meta_image_url   : getProductViewState.product.meta_image_url,
             })
             setFormData({
                 ...formData,
-                ['type']: getProductViewState.product.type,
-                ['status']: getProductViewState.product.status,
-                ['name']: getProductViewState.product.name,
-                ['url_key']: getProductViewState.product.url_key,
-                ['price']: getProductViewState.product.price,
-                ['is_sale_price']: getProductViewState.product.is_sale_price,
-                ['sale_price']: getProductViewState.product.sale_price,
-                ['categories']: getProductViewState.product.categories,
-                ['is_exclusive']: getProductViewState.product.is_exclusive,
+                ['type']    : getProductViewState.product.type,
+                ['status']  : getProductViewState.product.status,
+                ['name']    : getProductViewState.product.name,
+                ['url_key'] : getProductViewState.product.url_key,
+                ['price'] : getProductViewState.product.price,
+                ['is_sale_price'] : getProductViewState.product.is_sale_price,
+                ['sale_price']    : getProductViewState.product.sale_price,
+                ['categories']    : getProductViewState.product.categories,
+                ['is_exclusive']  : getProductViewState.product.is_exclusive,
                 ['sku']: getProductViewState.product.sku,
                 ['short_description']: getProductViewState.product.short_description,
                 ['tags']: getProductViewState.product.tags,
                 ['stock']: getProductViewState.product.stock,
                 ['gst']: getProductViewState.product.gst,
+
+                ['meta_title']       : getProductViewState.product.meta_title,
+                ['meta_keyword']     : getProductViewState.product.meta_keyword,
+                ['meta_description'] : getProductViewState.product.meta_description,
+                ['meta_image_url']   : getProductViewState.product.meta_image_url,
             })
         }
     }, [getProductViewState])
@@ -288,6 +298,52 @@ const ProductEdit = props => {
                                         </Select>
                                     </Form.Item>
                                 </Col>
+
+                                <Col xs={24} sm={24} md={12} lg={6} xl={6}>
+                                    <Form.Item
+                                        label="Meta Title"
+                                        name="meta_title"
+                                    >
+                                        <Input name="meta_title" placeholder="Enter product title" style={{ width: "100%" }} min={0}
+                                            onChange={handleChange}
+                                        />
+                                    </Form.Item>
+                                </Col>
+
+                                <Col xs={24} sm={24} md={12} lg={6} xl={6}>
+                                    <Form.Item
+                                        label="Meta Keyword"
+                                        name="meta_keyword"
+                                    >
+                                        <Input name="meta_keyword" placeholder="Enter product keyword" style={{ width: "100%" }} min={0}
+                                            onChange={handleChange}
+                                        />
+                                    </Form.Item>
+                                </Col>
+
+                                <Col xs={24} sm={24} md={12} lg={6} xl={6}>
+                                    <Form.Item
+                                        label="Meta Description"
+                                        name="meta_description"
+                                    >
+                                        <Input.TextArea name="meta_description" placeholder="Enter product description" style={{ width: "100%" }} min={0}
+                                            onChange={handleChange}
+                                        />
+                                    </Form.Item>
+                                </Col>
+
+                                <Col xs={24} sm={24} md={12} lg={6} xl={6}>
+                                    <Form.Item
+                                        label="Meta image url"
+                                        name="meta_image_url"
+                                    >
+                                        <Input name="meta_image_url" placeholder="Enter product url" style={{ width: "100%" }} min={0}
+                                            onChange={handleChange}
+                                        />
+                                    </Form.Item>
+                                </Col>
+
+
                                 <Col xs={24} sm={24} md={12} lg={12} xl={12}>
                                     <Form.Item
                                         label="Categories"

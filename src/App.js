@@ -37,6 +37,16 @@ import OrderList from "./page/OrderList/OrderList"
 import CustomerList from "./page/CustomerList/CustomerList"
 import OrderDetails from "./page/OrderDetails/OrderDetails"
 import OrderUpdate from "./page/OrderUpdate/OrderUpdate"
+
+
+// @masters -----------------------------------------------------------
+
+    import CouponsList from "./page/Masters/Coupons/CouponsList"
+    import CouponsAdd  from "./page/Masters/Coupons/CouponsAdd"
+    import CouponsEdit from "./page/Masters/Coupons/CouponsEdit"
+
+// --------------------------------------------------------------------
+
 // others
 import theme from './theme'
 
@@ -51,6 +61,9 @@ const App = () => {
                     <Switch>
                         <Route path={[
                             '/',
+                            '/master/coupons',
+                            '/master/coupons/add',
+                            '/master/coupons/edit',
                             '/category/list',
                             '/category/add',
                             '/category/:category_id/edit',
@@ -81,10 +94,16 @@ const App = () => {
                                 <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, }} >
                                     <Sidebar />
                                 </Sider>
-                                <Layout className="site-layout" style={{ marginLeft: 200 }}>
+                                <Layout className="site-layout" style={{ marginLeft: '250px' }}>
                                     <Content style={{ overflow: 'initial', background: "#fff" }}>
                                         <Switch>
                                             <PrivateRoute exact path="/" component={Home} />
+
+                                            <PrivateRoute exact path="/master/coupons"      component={CouponsList} />
+                                            <PrivateRoute exact path="/master/coupons/add"  component={CouponsAdd} />
+                                            <PrivateRoute exact path="/master/coupons/edit" component={CouponsEdit} />
+
+                                            
                                             <PrivateRoute exact path="/category/list" component={CategoryList} />
                                             <PrivateRoute exact path="/category/add" component={CategoryAdd} />
                                             <PrivateRoute exact path="/category/:category_id/edit" component={CategoryEdit} />

@@ -96,7 +96,7 @@ const CustomerList = props => {
             sortable: true,
         },{
             name: 'Action',
-            cell: data => <Button className={ data.status === 'Active' ? 'deactivate' : 'active' } onClick={() => showStatusChangeModal(data)}>{ data.status === 'Active' ? 'Deactivate' : 'Activate' }</Button>,
+            cell: data => <Button className={ data.status === 'Active' ? 'deactivate' : 'active' } onClick={() => showStatusChangeModal(data)}>{ data.status === 'Active' ? 'Inactive' : 'Active' }</Button>,
             sortable: true,
             export:false,
         }
@@ -108,7 +108,11 @@ const CustomerList = props => {
 
         try {
 
-            const serverResponse = await sendEmail(data);
+            const customersEmail = data.map((customer,index) => customer.email).join(',');
+            const subject = 'Notification';
+            const text    = 'Hi this is a test email :)';  
+    
+            const serverResponse = await sendEmail({ customersEmail,subject,text });
 
             if(serverResponse.status === 'error') { throw new Error(); }
 

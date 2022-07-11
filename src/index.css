@@ -53,6 +53,17 @@ button.active:hover { background-color: #5b0c1c; color:white !important; border-
 button.deactivate { background-color: #5b0c1c; color:white !important; border-color: #5b0c1c !important;  }
 button.deactivate:hover { background-color: #5b0c1c; color:white !important; border-color: #5b0c1c !important;  }
 
+button.xlsx-export { background-color: #006400; color:white !important; border-color: #006400 !important; margin-left: 8px; }
+button.xlsx-export:hover { background-color: #006400; color:white !important; border-color: #006400 !important; margin-left: 8px; }
+button.xlsx-export:active { background-color: #006400; color:white !important; border-color: #006400 !important; margin-left: 8px; }
+
+
+
+.ant-layout-sider::-webkit-scrollbar {
+  width: 0px;
+  background-color: #aaa; /* or add it to the track */
+}
+
 
 /* @dashboard-styles ------------------------------------------------------------------------------- */
 
@@ -74,6 +85,8 @@ button.deactivate:hover { background-color: #5b0c1c; color:white !important; bor
     height: 120px;
   }
 
+  .date-filter-card { height: 40px !important; margin-bottom: 10px !important; padding: 0px !important; }
+
   .orders-card { background-color: #5b0c1c !important; }
   .orders-card .today-orders { color: white; font-size: 1.4rem !important; padding: 0px !important; margin: 0px !important;  }
   .orders-card .total-orders { color: white; font-size: 1.1rem !important; padding: 0px !important; margin: 5px 0px 0px 0px !important;  }
@@ -94,3 +107,11 @@ button.deactivate:hover { background-color: #5b0c1c; color:white !important; bor
   .dashboard-date-filter .date-picker { width: 100%; border-radius: 5px !important; }
 
 /* ------------------------------------------------------------------------------------------------- */ 
+
+/* @home-page-slider styles ------------------------------------------------------------------------ */
+
+.banner-image-container{
+  background: white !important;
+  border-radius: 15px !important;
+  padding: 10px !important;
+}

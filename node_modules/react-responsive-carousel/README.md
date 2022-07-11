@@ -8,7 +8,7 @@ Powerful, lightweight and fully customizable carousel component for React apps.
 
 ### Important
 
-I don't have any time available to keep maintaining this package. If you have any request, try to sort it within the comuninity. I'm able to merge pull requests that look safe from time to time but no commitment on timelines here. Feel free to fork it and publish under other name if you are in a hurry or to use another component.
+I don't have any time available to keep maintaining this package. If you have any request, try to sort it within the community. I'm able to merge pull requests that look safe from time to time but no commitment on timelines here. Feel free to fork it and publish under other name if you are in a hurry or to use another component.
 
 ### Features
 
@@ -97,6 +97,7 @@ ReactDOM.render(<DemoCarousel />, document.querySelector('.demo-carousel'));
 
 | Name                                     | Value                        | Description                                                                                                                                                                                                           |
 | ---------------------------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ariaLabel                                | `string`                     | Define the `aria-label` attribute for the root carousel element. The default is `undefined`, skipping the attribute from markup.                                                                                      |
 | axis                                     | `'horizontal'`, `'vertical'` | Define the direction of the slider, defaults to `'horizontal'`.                                                                                                                                                       |
 | autoFocus                                | `boolean`                    | Force focus on the carousel when it renders.                                                                                                                                                                          |
 | autoPlay                                 | `boolean`                    | Change the slide automatically based on `interval` prop.                                                                                                                                                              |

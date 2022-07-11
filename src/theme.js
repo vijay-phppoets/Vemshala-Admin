@@ -24,7 +24,7 @@ const theme = {
         desktopL: `(max-width: ${size.desktop})`
     },
     colors: {
-        primary: "#08979C",
+        primary: "#5b0c1c",
         black: "#000"
     },
 

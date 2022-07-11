@@ -114,7 +114,7 @@ const CategoryList = props => {
 
                 {getCategoryTreeState.apiState === "success" &&
                     <>
-                        <div style={{ border: "solid 1px #ccc", width: "max-content", padding: 10 }} >
+                        <div style={{ borderRadius:'10px', border: "solid 1px #ccc",backgroundColor:'white',height:'100%',width: "100%", padding: 10 }} >
                             <Tree
                                 treeData={getTreeData(getCategoryTreeState.tree)}
                                 showLine={{ showLeafIcon: false }}

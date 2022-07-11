@@ -109,17 +109,24 @@ const ProductImages = props => {
 
         setSubmitLoading(true)
 
-        const s3UrlRes1 = await getS3SingedUrl(filename, imageValRes.ext, image)
-        // const response  = await axios.put(s3UrlRes1.url, image)
+        try {
 
-        console.clear(); console.log({ s3UrlRes1 })
+            const s3UrlRes1 = await getS3SingedUrl(filename, imageValRes.ext, image)
+            const response  = await axios.put(s3UrlRes1.url, image)
 
-        saveProdImg({
-            product_id: product_id,
-            image: `${filename}.${imageValRes.ext}`,
-            attribute_id: imgAttr.attribute_id,
-            attribute_option_id: imgAttr.attribute_option_id,
-        })
+            saveProdImg({
+                product_id: product_id,
+                image: `${filename}.${imageValRes.ext}`,
+                attribute_id: imgAttr.attribute_id,
+                attribute_option_id: imgAttr.attribute_option_id,
+            })
+
+            console.clear(); console.log({ s3UrlRes1, response });  console.log(image)
+            
+        } catch (error) {
+            console.clear();console.clear();
+            console.log(error); console.log(image)
+        }
     }
 
     return (

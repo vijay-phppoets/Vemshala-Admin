@@ -57,7 +57,7 @@ const App = () => {
     return (
         <Provider store={store}>
             <ThemeProvider theme={theme}>
-                <Router>
+                <Router basename="/portal">
                     <Switch>
                         <Route path={[
                             '/',

@@ -5,6 +5,9 @@ import { connect } from "react-redux"
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import { DeleteOutlined } from "@ant-design/icons"
+import 'antd/dist/antd.css';
+import { PlusOutlined } from '@ant-design/icons';
+import { Modal, Upload } from 'antd';
 
 /* custom component */
 import Header from "../../component/Header/Header"
@@ -23,8 +26,51 @@ import cnf from "../../config"
 
 
 
+const getBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => resolve(reader.result);
+
+    reader.onerror = (error) => reject(error);
+  });
+
 
 const HomeSlider = props => {
+
+    const [previewVisible, setPreviewVisible] = useState(false);
+    const [previewImage, setPreviewImage] = useState('');
+    const [previewTitle, setPreviewTitle] = useState('');
+    const [fileList, setFileList] = useState([]);
+
+  const handleCancel = () => setPreviewVisible(false);
+
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+
+    setPreviewImage(file.url || file.preview);
+    setPreviewVisible(true);
+    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
+  };
+
+  const handleChange = ({ fileList: newFileList }) => { setFileList(newFileList); }
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div
+        style={{
+          marginTop: 8,
+        }}
+      >
+        Upload
+      </div>
+    </div>
+  );
+
     /* variables */
     const {
         saveSliderImages, saveSliderImagesReset, saveSliderImagesState,
@@ -177,18 +223,26 @@ const HomeSlider = props => {
 
 
     return (
-        <>
-            {redirect[0] &&
-                <Redirect to={redirect[1]} />}
-
-            <Header
-                title="Home Page Sliders"
-            />
+        <React.Fragment>{ redirect[0] && <Redirect to={redirect[1]} />}
+            <Header title="Home Page Sliders"/>
             <PageContainer>
-
                 <Form form={form} layout="vertical" onFinish={handleSubmit} >
                     <Row gutter="24" >
+
                         <Col span="8">
+                            <div class="banner-image-container">
+                                <Upload
+                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                    listType="picture-card"
+                                    fileList={fileList}
+                                    onPreview={handlePreview}
+                                    onChange={handleChange}
+                                >{ fileList.length > 1 ? null : uploadButton}
+                                </Upload>
+                            </div>
+                        </Col>
+
+                        {/* <Col span="8">
                             <Form.Item
                                 label="Banner Image"
                                 name="banner_img"
@@ -223,15 +277,18 @@ const HomeSlider = props => {
                                     onChange={v => setFormData({ ...formData, ["sequence"]: v })}
                                 />
                             </Form.Item>
-                        </Col>
+                        </Col> */}
                     </Row>
                     <Button type="primary" htmlType="submit" loading={submitLoading} >SUBMIT</Button>
                 </Form>
 
-                <Divider />
+                <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
+                    <img alt="example" style={{ width: '100%',}} src={previewImage} />
+                </Modal><Divider />
+                
                 <Table dataSource={tableData} columns={columns} size="small" pagination={false} />
             </PageContainer>
-        </>
+        </React.Fragment>
     )
 }
 

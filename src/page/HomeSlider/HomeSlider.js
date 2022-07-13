@@ -37,14 +37,15 @@ const getBase64 = (file) =>
   });
 
 
+  console.error = () => null
+  console.warn = () => null
+
 const HomeSlider = props => {
 
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
-    const [fileList, setFileList] = useState([]);
-
-  const handleCancel = () => setPreviewVisible(false);
+    const handleCancel = () => setPreviewVisible(false);
 
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
@@ -56,20 +57,6 @@ const HomeSlider = props => {
     setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
   };
 
-  const handleChange = ({ fileList: newFileList }) => { setFileList(newFileList); }
-
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
-      </div>
-    </div>
-  );
 
     /* variables */
     const {
@@ -186,14 +173,36 @@ const HomeSlider = props => {
         }
     }, [getSliderListState])
 
-    /* functions */
+
+
+    /* @image-preview ------------------------------------------------------------------------------------------------- */
+
+        const [desktopList, setDesktopFileList] = useState([]);
+        const [mobileList,  setMobileFileList] = useState([]);
+
+        const desktopImageHandler = (props) => { 
+
+            if(props.fileList.length > 1) props.fileList.shift();
+
+            set_banner_img(props.file.originFileObj); setDesktopFileList(props.fileList); 
+        }
+        
+        const mobileImageHandler  = (props) => { 
+            
+            if(props.fileList.length > 1) props.fileList.shift();
+
+            set_m_banner_img(props.file.originFileObj); setMobileFileList(props.fileList);  
+        }
+        
+    /* @api-call  ----------------------------------------------------------------------------------------------------- */
+
     const handleSubmit = async () => {
+
         let banner_img_filename = uuidv4()
         let m_banner_img_filename = uuidv4()
 
         let bannerImageValRes = validateImageFile(banner_img)
         let mBannerImageValRes = validateImageFile(m_banner_img)
-
 
         if (!bannerImageValRes.status) {
             alert("Banner Image's extension is not allowed.")
@@ -216,11 +225,13 @@ const HomeSlider = props => {
         formData.m_banner_img = `${m_banner_img_filename}.${mBannerImageValRes.ext}`
 
         saveSliderImages(formData)
+
+        setDesktopFileList([]); /* remove image from mobile array */ 
+        setMobileFileList([]) /* remove image from mobile array */ 
+
     }
 
-
-
-
+    /* code complete ------------------------------------------------------------------------------------------ */
 
     return (
         <React.Fragment>{ redirect[0] && <Redirect to={redirect[1]} />}
@@ -232,17 +243,46 @@ const HomeSlider = props => {
                         <Col span="8">
                             <div class="banner-image-container">
                                 <Upload
-                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                    customRequest={({ file, onSuccess }) => { setTimeout(() => { onSuccess("ok"); }, 0) }}
                                     listType="picture-card"
-                                    fileList={fileList}
+                                    fileList={desktopList}
                                     onPreview={handlePreview}
-                                    onChange={handleChange}
-                                >{ fileList.length > 1 ? null : uploadButton}
+                                    onChange={desktopImageHandler}
+                                    accept="image/png, image/jpg, image/jpeg"
+                                    name="desktop-banner-image"
+                                >
+                                    <div>
+                                        <PlusOutlined></PlusOutlined>
+                                        <div style={{ marginTop: 8}}>Upload</div>
+                                    </div>
                                 </Upload>
+                                <h4>Banner image for desktop</h4>
+                                <span>JPEG, JPG, PNG, WEBP | 3:2 Ratio  </span>
                             </div>
                         </Col>
 
-                        {/* <Col span="8">
+                        <Col span="8">
+                            <div class="banner-image-container">
+                                <Upload
+                                    customRequest={({ file, onSuccess }) => { setTimeout(() => { onSuccess("ok"); }, 0) }}
+                                    listType="picture-card"
+                                    fileList={mobileList}
+                                    onPreview={handlePreview}
+                                    onChange={mobileImageHandler}
+                                    accept="image/png, image/jpg, image/jpeg"
+                                    name="mobile-banner-image"
+                                >
+                                    <div>
+                                        <PlusOutlined></PlusOutlined>
+                                        <div style={{ marginTop: 8}}>Upload</div>
+                                    </div>
+                                </Upload>
+                                <h4>Banner image for mobile</h4>
+                                <span>JPEG, JPG, PNG, WEBP | 3:2 Ratio  </span>
+                            </div>
+                        </Col>
+
+                          {/* <Col span="8">
                             <Form.Item
                                 label="Banner Image"
                                 name="banner_img"
@@ -254,7 +294,7 @@ const HomeSlider = props => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col span="8">
+                       <Col span="8">
                             <Form.Item
                                 label="Banner Image For Mobile"
                                 name="m_banner_img"
@@ -265,21 +305,20 @@ const HomeSlider = props => {
                                     onChange={e => set_m_banner_img(e.target.files[0])}
                                 />
                             </Form.Item>
-                        </Col>
-                        <Col span="4">
-                            <Form.Item
-                                label="Sequence"
-                                name="sequence"
-                                rules={[{ required: true, message: 'Required' }]}
-                            >
+                        </Col>*/}
+
+                        <Col span="8">
+                            <div class="banner-image-container">
+                            <Form.Item label="Sequence" name="sequence"rules={[{ required: true, message: 'Required' }]}>
                                 <InputNumber name="sequence" placeholder="Enter Sequence"
-                                    style={{ width: "100%" }}
-                                    onChange={v => setFormData({ ...formData, ["sequence"]: v })}
+                                    style={{ width: "100%",borderRadius:'8px' }}
+                                    onChange={value => setFormData({ ...formData, ["sequence"]: value })}
                                 />
                             </Form.Item>
-                        </Col> */}
+                            </div>
+                        </Col>  
                     </Row>
-                    <Button type="primary" htmlType="submit" loading={submitLoading} >SUBMIT</Button>
+                    <Button type="primary" style={{ marginTop:'10px' }} htmlType="submit" loading={submitLoading} >SUBMIT</Button>
                 </Form>
 
                 <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>

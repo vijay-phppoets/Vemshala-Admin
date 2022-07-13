@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { Form, Row, Col, Select, Button, Input, InputNumber, message, Space, Tooltip, Popconfirm, Tag, Divider } from "antd"
+import { Form, Row, Col, Select, Button, Input, Upload, message, Space, Tooltip, Popconfirm, Tag, Divider } from "antd"
+import { PlusOutlined } from '@ant-design/icons';
+
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
 import { v4 as uuidv4 } from 'uuid'
@@ -38,6 +40,24 @@ const ProductImages = props => {
         attribute_id: null,
         attribute_option_id: null
     })
+
+
+    /* @image-preview ------------------------------------------------------------------------------------------------- */
+
+        const [imageList, setImageList] = useState([]);
+ 
+        const imageHandler = (props) => { 
+
+            if(props.fileList.length > 1) props.fileList.shift();
+
+            set_image(props.file.originFileObj); setImageList(props.fileList); 
+            setImgAttr({
+                attribute_id: null,
+                attribute_option_id: null
+            })
+        }
+
+    /* -----------------------------------------------------------------------------------------------------------------*/
 
     /* callbacks */
     useEffect(() => {
@@ -121,13 +141,11 @@ const ProductImages = props => {
                 attribute_option_id: imgAttr.attribute_option_id,
             })
 
-            console.clear(); console.log({ s3UrlRes1, response });  console.log(image)
+            setImageList([]) /* remove image from array */
             
-        } catch (error) {
-            console.clear();console.clear();
-            console.log(error); console.log(image)
-        }
+        } catch (error) {  console.clear(); console.log(error); }
     }
+    
 
     return (
         <>
@@ -143,7 +161,27 @@ const ProductImages = props => {
                         <ProductTabs id={getProductViewState.product.id} active="images" type={getProductViewState.product.type} />
                         <Form onFinish={handleImgSub}>
                             <Row gutter="12" >
-                                <Col span="12">
+                                <Col span="8">
+                                    <div class="banner-image-container">
+                                        <Upload
+                                            customRequest={({ file, onSuccess }) => { setTimeout(() => { onSuccess("ok"); }, 0) }}
+                                            listType="picture-card"
+                                            fileList={imageList}
+                                            // onPreview={handlePreview}
+                                            onChange={imageHandler}
+                                            accept="image/png, image/jpg, image/jpeg"
+                                            name="desktop-banner-image"
+                                        >
+                                            <div>
+                                                <PlusOutlined></PlusOutlined>
+                                                <div style={{ marginTop: 8}}>Upload</div>
+                                            </div>
+                                        </Upload>
+                                        <h4>Product Image</h4>
+                                        <span>JPEG, JPG, PNG, WEBP | 1:1 Ratio  </span>
+                                    </div>
+                                </Col>
+                                {/* <Col span="12">
                                     <Form.Item
                                         label="Image"
                                         name="image"
@@ -160,7 +198,7 @@ const ProductImages = props => {
                                             }}
                                         />
                                     </Form.Item>
-                                </Col>
+                                </Col> */}
                                 <Col span="4">
                                     <Button type="primary" htmlType="submit" loading={submitLoading} >SAVE</Button>
                                 </Col>

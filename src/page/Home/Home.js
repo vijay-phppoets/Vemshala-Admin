@@ -7,6 +7,7 @@ import { ExportToCsv } from 'export-to-csv';
     import Header from "../../component/Header/Header";
     import { PageContainer }   from "../../component/Xcomponent";
     import getDashboardDetails from "../../api/getDashboardDetails";
+    import getSalesExport      from '../../api/getSalesExport'
     
 /* ------------------------------------------------------------------------------------------------------------- */
 
@@ -14,8 +15,22 @@ const Home = (props) => {
 
     // @declare-states --------------------------------------------------------------------------------
 
+        const exportOptions = { 
+            filename:"Monthly-Sales",
+            fieldSeparator: ',',
+            quoteStrings: '"',
+            decimalSeparator: '.',
+            showLabels: false, 
+            showTitle: false,
+            useTextFile: false,
+            useBom: true,
+            useKeysAsHeaders: true,
+            headers: []
+        };
+
         const dashboardDefaultStates = {
             orders    : { total : 0, today : 0 },
+            sales     : { total : 0, today : 0 },
             cancelled : { total : 0, today : 0 },
             others    : { 
                 deliveredOrders  : 0,
@@ -35,48 +50,43 @@ const Home = (props) => {
 
     // ------------------------------------------------------------------------------------------------
 
-    const xlsxExport = () => {
+    const xlsxExport = async () => {
 
-        var data = [
-            {
-              Name: 'Test 1',
-              Age: 13,
-              Average: 8.2,
-              Approved: true,
-              Description: "using 'Content here, content here' "
-            },
-            {
-              Name: 'Test 2',
-              Age: 11,
-              Average: 8.2,
-              Approved: true,
-              Description: "using 'Content here, content here' "
-            },
-            {
-              Name: 'Test 4',
-              Age: 10,
-              Average: 8.2,
-              Approved: true,
-              Description: "using 'Content here, content here' "
-            },
-          ];
+        console.clear(); console.clear();
 
-        const options = { 
-            filename:"Monthly-Sales",
-            fieldSeparator: ',',
-            quoteStrings: '"',
-            decimalSeparator: '.',
-            showLabels: false, 
-            showTitle: false,
-            useTextFile: false,
-            useBom: true,
-            useKeysAsHeaders: true,
-            headers: []
-          };
+        try {
 
-        const csvExporter = new ExportToCsv(options);
+            const csvExporterData = [];
+
+            const { data } = await getSalesExport(dateFilter)
+
+            for (const salesData of data.data) {
+
+                const dateBeautify = (date) => {
+
+                    const month = String(date.getUTCMonth() + 1);
+                    const day  = String(date.getUTCDate())
+              
+                    return `${date.getUTCFullYear()}-${month.padStart(2, "0")}-${day.padStart(2,"0")}`
+                }
+
+                csvExporterData.push({
+                    'Customer Name' : `${salesData.b_fname} ${salesData.b_lname}`,
+                    'Product'       :  salesData.productName,
+                    'Price'         :  salesData.productPrice,
+                    'Payment Mode'  :  salesData.payment_mode,
+                    'Order Date'    :  dateBeautify(new Date(salesData.order_date)),
+                    'Payment Type'  :  salesData.payment_type,
+                    'Sub Total'     :  salesData.sub_total,
+                    'Total'         :  salesData.total,
+                })
+            }
+
+            const csvExporter = new ExportToCsv(exportOptions);
  
-        csvExporter.generateCsv(data);
+            csvExporter.generateCsv(csvExporterData);
+            
+        } catch (error) { console.clear(); console.log(error); }
     }
 
     const dateChangeHandler = (date,name) => { updateDateFilter({ ...dateFilter, [name] : date }) };
@@ -100,6 +110,7 @@ const Home = (props) => {
 
             updateDetails({
                 orders    : { today : data.data.todayOrders,    total : data.data.totalOrders },
+                sales     : { today : data.data.todaySales,     total : data.data.totalSales },
                 cancelled : { total : data.data.totalCancelled, today : data.data.todayCancelled },
                 others    : { 
                     deliveredOrders  : data.data.deliveredOrders, 
@@ -139,8 +150,8 @@ const Home = (props) => {
                     </Col>
                     <Col span={8}>
                         <Card className="dashboard-card sales-card">
-                            <p className="today-sales">Today Sales : 25 ₹</p>
-                            <p className="total-sales">Total Sales : 120 ₹</p>
+                            <p className="today-sales">Today Sales : { details.sales.today } ₹</p>
+                            <p className="total-sales">Total Sales : { details.sales.total } ₹</p>
                         </Card>
                     </Col>
                     <Col span={8}>

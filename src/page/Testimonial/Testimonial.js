@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
-import { Form, Input, Row, Col, TreeSelect, Button, message, InputNumber, Divider, Popconfirm, Table } from "antd"
+import { Form, Input, Row, Col, Upload, Button, message, InputNumber, Divider, Popconfirm, Table } from "antd"
 import { Redirect } from "react-router-dom"
 import { connect } from "react-redux"
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import { DeleteOutlined } from "@ant-design/icons"
+import { PlusOutlined } from '@ant-design/icons';
 
 
 /* custom component */
@@ -84,6 +85,22 @@ const Testimonial = props => {
     ];
     const [tableData, setTableData] = useState([])
     const [form] = Form.useForm()
+
+
+    /* @image-preview ------------------------------------------------------------------------------------------------- */
+
+        const [imageList, setImageList] = useState([]);
+ 
+        const imageHandler = (props) => { 
+
+            if(props.fileList.length > 1) props.fileList.shift();
+
+            set_image(props.file.originFileObj); setImageList(props.fileList); 
+        }
+
+    /* -----------------------------------------------------------------------------------------------------------------*/
+
+
 
     /* callbakcs */
     useEffect(() => {
@@ -167,7 +184,7 @@ const Testimonial = props => {
             formData.image = `${image_filename}.${imageValRes.ext}`
         }
 
-        saveTestimonial(formData)
+        saveTestimonial(formData); setImageList([]) /* update image array */
     }
 
 
@@ -185,6 +202,27 @@ const Testimonial = props => {
                 <Form form={form} layout="vertical" onFinish={handleSubmit} >
                     <Row gutter="24" >
                         <Col span="8">
+                            <div class="banner-image-container">
+                                <Upload
+                                    customRequest={({ file, onSuccess }) => { setTimeout(() => { onSuccess("ok"); }, 0) }}
+                                    listType="picture-card"
+                                    fileList={imageList}
+                                    onPreview={() => null}
+                                    onChange={imageHandler}
+                                    accept="image/png, image/jpg, image/jpeg"
+                                    name="desktop-banner-image"
+                                >
+                                    <div>
+                                        <PlusOutlined></PlusOutlined>
+                                        <div style={{ marginTop: 8}}>Upload</div>
+                                    </div>
+                                </Upload>
+                                <h4>Product Image</h4>
+                                <span>JPEG, JPG, PNG, WEBP | 1:1 Ratio  </span>
+                            </div>
+                        </Col>
+
+                        <Col span="8">
                             <Form.Item
                                 label="Description"
                                 name="description"
@@ -195,7 +233,8 @@ const Testimonial = props => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col span="8">
+                        
+                        {/* <Col span="8">
                             <Form.Item
                                 label="Image"
                                 name="image"
@@ -205,7 +244,9 @@ const Testimonial = props => {
                                     onChange={e => set_image(e.target.files[0])}
                                 />
                             </Form.Item>
-                        </Col>
+                        </Col> */}
+
+
                         <Col span="8">
                             <Form.Item
                                 label="Name"

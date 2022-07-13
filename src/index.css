@@ -12,6 +12,9 @@ code {
     monospace;
 }
 
+aside.scrollbar-width{ width: 0px !important; }
+aside{  scrollbar-width: 0px !important;}
+
 
 body, html, #root {
   margin: 0px;
@@ -25,6 +28,7 @@ body, html, #root {
 
 .ant-modal-content { border-radius: 10px !important; }
 .ant-notification-notice { border-radius: 10px !important; }
+
 
 .email-container {
   display: inline-block;
@@ -41,11 +45,22 @@ body, html, #root {
   min-width: 250px !important;
   width: 250px !important;
 }
+.ant-btn-primary {
+  color: #fff;
+  border-color: #5b0c1c !important;
+  background: #5b0c1c !important;
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+}
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #5b0c1c !important;
+}
 
 /* .ant-layout{ margin-left: 200px !important;} */
  
 button { border-radius: 8px !important; }
 input { border-radius: 8px !important; }
+.ant-select-selector { border-radius: 8px !important; }
 
 button.active { background-color: #5b0c1c; color:white !important; border-color: #5b0c1c !important; }
 button.active:hover { background-color: #5b0c1c; color:white !important; border-color: #5b0c1c !important;  }
@@ -53,16 +68,9 @@ button.active:hover { background-color: #5b0c1c; color:white !important; border-
 button.deactivate { background-color: #5b0c1c; color:white !important; border-color: #5b0c1c !important;  }
 button.deactivate:hover { background-color: #5b0c1c; color:white !important; border-color: #5b0c1c !important;  }
 
-button.xlsx-export { background-color: #006400; color:white !important; border-color: #006400 !important; margin-left: 8px; }
-button.xlsx-export:hover { background-color: #006400; color:white !important; border-color: #006400 !important; margin-left: 8px; }
-button.xlsx-export:active { background-color: #006400; color:white !important; border-color: #006400 !important; margin-left: 8px; }
-
-
-
-.ant-layout-sider::-webkit-scrollbar {
-  width: 0px;
-  background-color: #aaa; /* or add it to the track */
-}
+button.xlsx-export { background-color: #006400 !important; color:white !important; border-color: #006400 !important; margin-left: 8px; }
+button.xlsx-export:hover { background-color: #006400 !important; color:white !important; border-color: #006400 !important; margin-left: 8px; }
+button.xlsx-export:active { background-color: #006400 !important; color:white !important; border-color: #006400 !important; margin-left: 8px; }
 
 
 /* @dashboard-styles ------------------------------------------------------------------------------- */

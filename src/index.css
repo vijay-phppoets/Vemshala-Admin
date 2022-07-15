@@ -90,7 +90,7 @@ button.xlsx-export:active { background-color: #006400 !important; color:white !i
   } */
   .dashboard-card {
     border-radius: 10px !important;
-    height: 120px;
+    /* height: 120px; */
   }
 
   .date-filter-card { height: 40px !important; margin-bottom: 10px !important; padding: 0px !important; }
@@ -107,7 +107,7 @@ button.xlsx-export:active { background-color: #006400 !important; color:white !i
   .cancelled-orders-card .today-cancelled-orders { color: white; font-size: 1.4rem !important; padding: 0px !important; margin: 0px !important;  }
   .cancelled-orders-card .total-cancelled-orders { color: white; font-size: 1.1rem !important; padding: 0px !important; margin: 5px 0px 0px 0px !important;  }
 
-  .other-orders-details { background-color: #5b0c1c !important; margin-top: 10px !important; height: 200px !important; }
+  .other-orders-details { background-color: #5b0c1c !important; margin-top: 10px !important;  }
   .other-orders-details p { letter-spacing: 1px; color: white; font-size: 1rem !important; padding: 0px !important; margin: 5px 0px 0px 0px !important;  }
 
   .dashboard-date-filter { background-color: transparent !important; margin-bottom: 10px; padding: 10px 10px 10px 2px; border-radius: 10px; }
@@ -122,4 +122,10 @@ button.xlsx-export:active { background-color: #006400 !important; color:white !i
   background: white !important;
   border-radius: 15px !important;
   padding: 10px !important;
+}
+.ant-tree-show-line .ant-tree-switcher{
+  margin: auto !important;
+}
+.ant-tree-switcher-noop{
+  display: none;
 }

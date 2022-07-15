@@ -49,7 +49,7 @@ const CategoryList = props => {
             if (node.children.length > 0) {
                 finalArray.push(
                     {
-                        title: (<Space>
+                        title: (<Space style={{margin:'1em'}}>
                             <img src={`${cnf.s3_base_url}${node.image}`} alt="" style={{ width: 40 }} />
                             <span>{node.name}</span>
                             <Link to={`/category/${node.id}/edit`}><Button size="small" icon={<EditOutlined />} /></Link>
@@ -70,7 +70,7 @@ const CategoryList = props => {
             } else {
                 finalArray.push(
                     {
-                        title: (<Space>
+                        title: (<Space style={{margin:'1em'}}>
                             <img src={`${cnf.s3_base_url}${node.image}`} alt="" style={{ width: 40 }} />
                             <span>{node.name}</span>
                             <Link to={`/category/${node.id}/edit`}><Button size="small" icon={<EditOutlined />} /></Link>

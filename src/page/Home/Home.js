@@ -52,8 +52,6 @@ const Home = (props) => {
 
     const xlsxExport = async () => {
 
-        console.clear(); console.clear();
-
         try {
 
             const csvExporterData = [];
@@ -71,14 +69,16 @@ const Home = (props) => {
                 }
 
                 csvExporterData.push({
-                    'Customer Name' : `${salesData.b_fname} ${salesData.b_lname}`,
-                    'Product'       :  salesData.productName,
-                    'Price'         :  salesData.productPrice,
-                    'Payment Mode'  :  salesData.payment_mode,
-                    'Order Date'    :  dateBeautify(new Date(salesData.order_date)),
-                    'Payment Type'  :  salesData.payment_type,
-                    'Sub Total'     :  salesData.sub_total,
-                    'Total'         :  salesData.total,
+                    'Customer Name'  : `${salesData.b_fname} ${salesData.b_lname}`,
+                    'Product'        :  salesData.productName,
+                    'GST Percentage' :  salesData.productGSTPercent,
+                    'GST Amount'     :  salesData.productGSTAmount,
+                    'Price'          :  salesData.productPrice,
+                    'Payment Mode'   :  salesData.payment_mode,
+                    'Order Date'     :  dateBeautify(new Date(salesData.order_date)),
+                    'Payment Type'   :  salesData.payment_type,
+                    'Sub Total'      :  salesData.sub_total,
+                    'Total'          :  salesData.total,
                 })
             }
 
